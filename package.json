@@ -1,0 +1,23 @@
+
+{                                                                                
+  "name": "be.eloistree.planetcoordplacementutility",                              
+  "displayName": "Planet Coordinate Placement Utility",                        
+  "version": "0.0.1",                         
+  "unity": "2018.1",                             
+  "unityRelease": "",                             
+  "description": "This tools allows to set object on or around a planet.",                         
+  "keywords": ["Script","Tool"],                       
+  "dependencies":{},     
+  "relatedPackages":{},     
+  "samples" : [],     
+  "author" : {
+"name":"",
+"mail":"",
+"url":""},     
+  "repository":{
+"type":"Git",
+"url":"https://github.com/EloiStree/2021_08_17_PlanetCoordPlacementUtility",
+"footprint":"",
+"revision":""},     
+  "category": "Script"                   
+} 
