@@ -73,6 +73,75 @@ public class PlanetCoordinateMono : MonoBehaviour
 }
 
 
+[System.Serializable]
+public class GPSHorizontalGroundPositioning
+{
+    public GPSCoordinate m_wheteToPosition;
+    public GPSCoordinate m_lookingTowardPosition;
+
+    public GPSHorizontalGroundPositioning(GPSCoordinate wheteToPosition, GPSCoordinate lookingTowardPosition)
+    {
+        m_wheteToPosition = wheteToPosition;
+        m_lookingTowardPosition = lookingTowardPosition;
+    }
+}
+[System.Serializable]
+public class GPSHorizontalInSpacePositioning
+{
+    public SpaceGPSCoordinate m_wheteToPosition;
+    public SpaceGPSCoordinate m_lookingTowardPosition;
+    public Vector3 m_additionalEulerRotation= Vector3.zero;
+
+    public GPSHorizontalInSpacePositioning(SpaceGPSCoordinate wheteToPosition, SpaceGPSCoordinate lookingTowardPosition, Vector3 additionalEulerRotation= new Vector3())
+    {
+        m_wheteToPosition = wheteToPosition;
+        m_lookingTowardPosition = lookingTowardPosition;
+        m_additionalEulerRotation = additionalEulerRotation;
+    }
+}
+
+[System.Serializable]
+public class UnityPosition{
+    public Vector3 m_where;
+    public Quaternion m_orientation;
+
+    public UnityPosition(Vector3 where, Quaternion orientation)
+    {
+        m_where = where;
+        m_orientation = orientation;
+    }
+}
+[System.Serializable]
+public class LocalUnityPosition : UnityPosition
+{
+    public LocalUnityPosition(Vector3 where, Quaternion orientation) : base(where, orientation)
+    {
+    }
+}
+
+[System.Serializable]
+public class GlobalUnityPosition : UnityPosition
+{
+    public GlobalUnityPosition(Vector3 where, Quaternion orientation) : base(where, orientation)
+    {
+    }
+}
+
+[System.Serializable]
+public class GPSHorizontalInSpaceLookAtPositioning
+{
+    public SpaceGPSCoordinate m_wheteToPosition;
+    public SpaceGPSCoordinate m_lookingAtPosition;
+    public Vector3 m_additionalEulerRotation = Vector3.zero;
+
+    public GPSHorizontalInSpaceLookAtPositioning(SpaceGPSCoordinate wheteToPosition, SpaceGPSCoordinate lookingAtPosition, Vector3 additionalEulerRotation= new Vector3())
+    {
+        m_wheteToPosition = wheteToPosition;
+        m_lookingAtPosition = lookingAtPosition;
+        m_additionalEulerRotation = additionalEulerRotation;
+    }
+}
+
 
 [System.Serializable]
 public class GPSCoordinate

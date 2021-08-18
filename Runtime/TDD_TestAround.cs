@@ -23,14 +23,34 @@ public class TDD_TestAround : MonoBehaviour
     public GameObject m_objectToPlaceDestination;
     public PlanetInformationAsMesh m_planetInformation;
 
-    private void Start()
-    {
-    }
+
+
+    public GPSHorizontalInSpacePositioning m_coordinateSatelite;
+    public GameObject m_sateliteToPlace;
+    public GameObject m_sateliteToPlaceDestination;
+
+    public GPSHorizontalInSpaceLookAtPositioning m_coordinateSateliteLooktAt;
+    public GameObject m_sateliteToPlaceLootAt;
+    public GameObject m_sateliteToPlaceDestinationLootAt;
+
+
 
     void Update()
     {
         m_placement.TryToPlaceOnGround(m_objectToPlace, m_planetInformation, m_coordinate, m_coordinateOrientation);
         m_placement.TryToPlaceOnGround(m_objectToPlaceDestination, m_planetInformation, m_coordinateOrientation, m_coordinate);
+
+        GPSHorizontalInSpacePositioning iTmp = new GPSHorizontalInSpacePositioning(m_coordinateSatelite.m_lookingTowardPosition, m_coordinateSatelite.m_wheteToPosition);
+        m_placement.TryToPlaceAround(m_sateliteToPlace, m_planetInformation, m_coordinateSatelite);
+        m_placement.TryToPlaceAround(m_sateliteToPlaceDestination, m_planetInformation, iTmp);
+
+        GPSHorizontalInSpaceLookAtPositioning iiTmp = new GPSHorizontalInSpaceLookAtPositioning(m_coordinateSateliteLooktAt.m_lookingAtPosition, m_coordinateSateliteLooktAt.m_wheteToPosition);
+        m_placement.TryToPlaceAround(m_sateliteToPlaceLootAt, m_planetInformation, m_coordinateSateliteLooktAt);
+        m_placement.TryToPlaceAround(m_sateliteToPlaceDestinationLootAt, m_planetInformation, iiTmp);
+
+
+
+        //m_placement.TryToPlaceHorizontalInSpace(m_sateliteToPlace, m_planetInformation,  m_coordinateSatelite.m_lookingTowardPosition, m_coordinateSatelite.m_wheteToPosition);
 
         //PlanetaryQuaterionUtility.GetLocalDirectionOf(m_coordinate, m_testTarget, out Vector3 direction);
         //Debug.DrawLine(m_testTarget.position, m_testTarget.position+ direction, Color.red) ;

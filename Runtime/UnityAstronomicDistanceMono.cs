@@ -3,10 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnityAstronomicDistanceMono : MonoBehaviour
+
+public abstract class AbstractAstronomicDistanceMono : MonoBehaviour, AstronomicDistanceConverter
+{
+    public abstract void GetAstronomicFromUnityValue(double unityValue, out double asAstronomic);
+    public abstract void GetKilometerFromUnityValue(double unityValue, out double asKilometer);
+    public abstract void GetLightYearFromUnityValue(double unityValue, out double asLightYear);
+    public abstract void GetUnityValueFrom(SpaceDistance spaceDistance, out double unityvalue);
+    public abstract void GetUnityValueFromAstronomicValue(double asAstronomic, out double unityValue);
+    public abstract void GetUnityValueFromKilometer(double asKilometer, out double unityValue);
+    public abstract void GetUnityValueFromLightYear(double asLightYear, out double unityValue);
+}
+
+public class UnityAstronomicDistanceMono : AbstractAstronomicDistanceMono, AstronomicDistanceConverter
 {
     public double m_unityUnityAsKilometer=6370;
-
 
     public double m_oneUnityValueAsLightYear ;
     public double m_oneUnityValueAsAstronomicUnit ;
@@ -40,38 +51,38 @@ public class UnityAstronomicDistanceMono : MonoBehaviour
     }
 
 
-    public void GetUnityValueFromKilometer(double asKilometer, out double unityValue)
+    public override void GetUnityValueFromKilometer(double asKilometer, out double unityValue)
     {
         unityValue = asKilometer / m_unityUnityAsKilometer;
     }
-    public void GetUnityValueFromLightYear(double asLightYear, out double unityValue)
+    public override void GetUnityValueFromLightYear(double asLightYear, out double unityValue)
     {
         double asKilometer = asLightYear * m_lightYearInKilometer;
         unityValue = asKilometer / m_unityUnityAsKilometer;
     }
-    public void GetUnityValueFromAstronomicValue(double asAstronomic, out double unityValue)
+    public override void GetUnityValueFromAstronomicValue(double asAstronomic, out double unityValue)
     {
 
         double asKilometer = asAstronomic * m_astronomicalInKilometer;
         unityValue = asKilometer / m_unityUnityAsKilometer;
     }
-    public void GetKilometerFromUnityValue(double unityValue , out double asKilometer)
+    public override void GetKilometerFromUnityValue(double unityValue , out double asKilometer)
     {
         asKilometer = unityValue * m_unityUnityAsKilometer;
     }
-    public void GetLightYearFromUnityValue(double unityValue , out double asLightYear)
+    public override void GetLightYearFromUnityValue(double unityValue , out double asLightYear)
     {
         double asKilometer = unityValue * m_unityUnityAsKilometer;
         asLightYear = asKilometer / m_lightYearInKilometer;
     }
-    public void GetAstronomicFromUnityValue(double unityValue , out double asAstronomic)
+    public override void GetAstronomicFromUnityValue(double unityValue , out double asAstronomic)
     {
 
         double asKilometer = unityValue * m_unityUnityAsKilometer;
         asAstronomic = asKilometer / m_astronomicalInKilometer;
     }
 
-    public void GetUnityValueFrom(SpaceDistance spaceDistance, out double unityvalue)
+    public override void GetUnityValueFrom(SpaceDistance spaceDistance, out double unityvalue)
     {
         if (spaceDistance.m_unitType == UnitType.Kilometer)
             GetUnityValueFromKilometer(spaceDistance.m_value, out unityvalue);
@@ -85,5 +96,18 @@ public class UnityAstronomicDistanceMono : MonoBehaviour
     public const double m_lightYearInKilometer = 9.46e12;
     public const double m_astronomicalInKilometer = 149597870.700;
    
+}
+
+
+public interface AstronomicDistanceConverter {
+
+    public void GetUnityValueFromKilometer(double asKilometer, out double unityValue);
+    public void GetUnityValueFromLightYear(double asLightYear, out double unityValue);
+    public void GetUnityValueFromAstronomicValue(double asAstronomic, out double unityValue);
+    public void GetKilometerFromUnityValue(double unityValue, out double asKilometer);
+    public void GetLightYearFromUnityValue(double unityValue, out double asLightYear);
+    public void GetAstronomicFromUnityValue(double unityValue, out double asAstronomic);
+    public void GetUnityValueFrom(SpaceDistance spaceDistance, out double unityvalue);
+
 
 }
