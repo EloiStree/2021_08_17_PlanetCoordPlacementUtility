@@ -17,11 +17,15 @@ public abstract class AbstractAstronomicDistanceMono : MonoBehaviour, Astronomic
 
 public class UnityAstronomicDistanceMono : AbstractAstronomicDistanceMono, AstronomicDistanceConverter
 {
+    public const double m_lightYearInKilometer = 9.46e12;
+    public const double m_astronomicalInKilometer = 149597870.700;
     public double m_unityUnityAsKilometer=6370;
 
+    [Header("Unit Debug")]
     public double m_oneUnityValueAsLightYear ;
     public double m_oneUnityValueAsAstronomicUnit ;
 
+    [Header("Code Check")]
     // 10km
     public double m_kmTest=10;
     public double m_kmUnity;
@@ -93,8 +97,6 @@ public class UnityAstronomicDistanceMono : AbstractAstronomicDistanceMono, Astro
         else unityvalue = spaceDistance.m_value;
     }
 
-    public const double m_lightYearInKilometer = 9.46e12;
-    public const double m_astronomicalInKilometer = 149597870.700;
    
 }
 

@@ -3,7 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetInformationAsMesh : MonoBehaviour, IPlanetInformation
+public abstract class AbstractPlanetInformation : MonoBehaviour, IPlanetInformation
+{
+    public abstract void GetGroundLayerMask(out LayerMask groundLayerMask);
+    public abstract void GetHighestHeight(out float maxGroundHeigh);
+    public abstract void GetRootCenterTransform(out Transform root);
+}
+
+public class PlanetInformationAsMesh : AbstractPlanetInformation, IPlanetInformation
 {
     public Transform m_root;
     public LayerMask m_groundLayer;
@@ -24,17 +31,17 @@ public class PlanetInformationAsMesh : MonoBehaviour, IPlanetInformation
         scanner.GetHeightOfPlanetary(m_root, m_groundLayer, h, out m_minHeight, out m_maxHeight);
     }
 
-    public void GetHighestHeight(out float maxGroundHeigh)
+    public override void GetHighestHeight(out float maxGroundHeigh)
     {
         maxGroundHeigh = m_maxHeight;
     }
 
-    public void GetRootCenterTransform(out Transform root)
+    public override void GetRootCenterTransform(out Transform root)
     {
         root = m_root;
     }
 
-    public void GetGroundLayerMask(out LayerMask groundLayerMask)
+    public override void GetGroundLayerMask(out LayerMask groundLayerMask)
     {
         groundLayerMask = m_groundLayer;
 
